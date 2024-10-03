@@ -18,6 +18,7 @@ class Restaurante:
     
     @classmethod
     def listar_restaurantes(cls) -> None:
+        print(f"\n---| Restaurantes cadastrados:\n")
         print(f"{'Nome do restaurante'.ljust(25)} | {'Categoria'.ljust(25)} | {'Avaliação'.ljust(25)} |{'Status'}")
         for restaurante in cls.restaurantes:
             print(f'{restaurante._nome.ljust(25)} | {restaurante._categoria.ljust(25)} | {str(restaurante.media_avaliacoes).ljust(25)} |{restaurante.ativo}')
@@ -30,7 +31,7 @@ class Restaurante:
         self._ativo = not self._ativo
 
     def receber_avaliacao(self, cliente, nota) -> None:
-        if 0 < nota <= 5: 
+        if 0 < nota <= 10: 
             avaliacao = Avaliacao(cliente, nota)
             self._avaliacao.append(avaliacao)
 
@@ -48,7 +49,7 @@ class Restaurante:
             self._cardapio.append(item)
 
     def listar_cardapio(self) -> str:
-        print(f'Cardápio do restaurante {self._nome}:')
+        print(f'\n--- | Cardápio do restaurante {self._nome}:')
         for i, item in enumerate(self._cardapio, start=1):
             print(f'{i} | Item: {item._nome} | Preço: R${item._preco}')
-            
+        
