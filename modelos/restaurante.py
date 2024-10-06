@@ -30,7 +30,7 @@ class Restaurante:
     def alternar_estado(self) -> None:
         self._ativo = not self._ativo
 
-    def receber_avaliacao(self, cliente, nota) -> None:
+    def receber_avaliacao(self, cliente: str, nota: int) -> None:
         if 0 < nota <= 10: 
             avaliacao = Avaliacao(cliente, nota)
             self._avaliacao.append(avaliacao)
@@ -44,12 +44,14 @@ class Restaurante:
         media = round(soma_das_notas / quantidade_de_notas, 1)
         return media
     
-    def adicionar_no_cardapio(self, item) -> None:
+    def adicionar_no_cardapio(self, item: ItemCardapio) -> None:
         if isinstance(item, ItemCardapio):
             self._cardapio.append(item)
+        else:
+            raise ValueError('Item precisa ser do tipo ItemCardapio')
 
-    def listar_cardapio(self) -> str:
-        print(f'\n--- | Cardápio do restaurante {self._nome}:')
+    def listar_cardapio(self) -> None:
+        print(f'\n--- | Cardápio do restaurante {self._nome}:\n')
         for i, item in enumerate(self._cardapio, start=1):
             print(f'{i} | Item: {item._nome} | Preço: R${item._preco}')
         
