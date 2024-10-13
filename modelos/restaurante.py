@@ -1,7 +1,6 @@
 from modelos.avaliacao import Avaliacao
 from modelos.cardapio.item_cardapio import ItemCardapio
 
-
 class Restaurante:
     restaurantes = []
 
@@ -9,7 +8,7 @@ class Restaurante:
         self._nome = nome.title()
         self._categoria = categoria.upper()
         self._ativo = False
-        self._avaliacao = []
+        self._avaliacoes = []
         self._cardapio = []
         Restaurante.restaurantes.append(self)
     
@@ -33,14 +32,14 @@ class Restaurante:
     def receber_avaliacao(self, cliente: str, nota: int) -> None:
         if 0 < nota <= 10: 
             avaliacao = Avaliacao(cliente, nota)
-            self._avaliacao.append(avaliacao)
+            self._avaliacoes.append(avaliacao)
 
     @property
     def media_avaliacoes(self) -> int:
-        if not self._avaliacao:
+        if not self._avaliacoes:
             return '-'
-        soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacao)
-        quantidade_de_notas = len(self._avaliacao)
+        soma_das_notas = sum(avaliacao._nota for avaliacao in self._avaliacoes)
+        quantidade_de_notas = len(self._avaliacoes)
         media = round(soma_das_notas / quantidade_de_notas, 1)
         return media
     
